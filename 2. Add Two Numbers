@@ -1,0 +1,50 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def addTwoNumbers(self, l1, l2):
+        
+        # 2,4,3==>342 ; 5,6,4==>465
+        def mdigit(l):
+            a=0
+            total=0
+            while True:
+                total += l.val*(10**a)
+                l=l.next
+                a=a+1
+                if l==None:
+                    break
+            return total
+        
+        # 342+465==>807
+        sum=mdigit(l1)+mdigit(l2)        
+        temp=sum
+        length=len(str(sum))        
+        
+        #creat 1st node
+        digit=temp%10
+        head=ListNode(digit)        
+        temp=temp//10
+        
+        #creat variable node(curr; 2nd List Node)
+        if length>1:
+            digit=temp%10
+            curr=ListNode(digit)
+            head.next=curr
+            temp=temp//10
+            
+        #creat whole list of node
+        for a in range(2,length):
+            digit=temp%10
+            curr.next=ListNode(digit)
+            curr=curr.next            
+            temp=temp//10
+            
+        return head
+
+
+        
+        
